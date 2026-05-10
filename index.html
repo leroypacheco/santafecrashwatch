@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Fe Crash Watch</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; margin:0; background: #f4f4f4; color: #222; }
+        header { background: #1a3c5e; color: white; padding: 1.5rem; text-align: center; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { margin: 0; font-size: 2.2rem; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; }
+        .section { background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        a { color: #1a3c5e; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        #map { height: 500px; border-radius: 8px; }
+        .footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #666; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Santa Fe Crash Watch</h1>
+        <p class="subtitle">Weekly Traffic Safety Summary • By Leroy Pacheco, PE</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>Latest Week: [Insert Week Ending Date]</h2>
+            <p><strong>Official City Crash Reports:</strong> 
+                <a href="https://crash-report-thecitydifferent.hub.arcgis.com" target="_blank">View All Reports on the City's ArcGIS Hub →</a>
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>This Week's Hotspot Map</h2>
+            <div id="map"></div>
+        </div>
+
+        <div class="section">
+            <h2>Latest Podcast / Audio Summary</h2>
+            <p>Watch or listen to this week's summary (recorded by Leroy Pacheco):</p>
+            <p><em>Video placeholder — embed your YouTube video here after upload.</em></p>
+        </div>
+
+        <div class="section">
+            <h2>This Week’s Summary (Script for Recording)</h2>
+            <div id="script-placeholder">
+                <p><strong>Good morning, Santa Fe.</strong></p>
+                <p>This is your weekly Santa Fe Crash Watch summary.</p>
+                <p><strong>Week ending [Date]:</strong> There were X crashes reported by Santa Fe Police.</p>
+                <p>Most incidents were concentrated near [major streets]. Two injury collisions were reported...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Santa Fe Crash Watch • Public Safety Information • Not affiliated with official City of Santa Fe agencies<br>
+        All data sourced from <a href="https://crash-report-thecitydifferent.hub.arcgis.com">City of Santa Fe Crash Reports</a>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([35.6870, -105.9378], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const crashes = [
+            {lat: 35.6805, lng: -105.9500, popup: "Cerrillos Rd & St. Francis - Property Damage"},
+            {lat: 35.6600, lng: -105.9200, popup: "Paseo de Peralta & Acequia Madre - Injury Crash"},
+            {lat: 35.6900, lng: -105.9800, popup: "I-25 Area - Multi-Vehicle"}
+        ];
+
+        crashes.forEach(crash => {
+            L.marker([crash.lat, crash.lng]).addTo(map)
+                .bindPopup(crash.popup);
+        });
+
+        L.heatLayer(crashes.map(c => [c.lat, c.lng]), {radius: 25}).addTo(map);
+    </script>
+</body>
+</html>
