@@ -27,7 +27,7 @@
 
     <div class="container">
         <div class="section">
-            <h2>April 2026 Summary</h2>
+            <h2>April 2026 Summary (Week of Apr 12–18)</h2>
             <p><strong>Official City Crash Reports:</strong> 
                 <a href="https://crash-report-thecitydifferent.hub.arcgis.com" target="_blank">View All Reports on the City's ArcGIS Hub →</a>
             </p>
@@ -58,15 +58,14 @@
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // April 2026 Real Pattern Data (based on City weekly reports)
+        // Refined April 2026 crash locations from the PDFs you sent
         const crashes = [
-            {lat: 35.6805, lng: -105.9500, popup: "Cerrillos Rd & St. Francis - Injury Crash"},
-            {lat: 35.6600, lng: -105.9200, popup: "Paseo de Peralta & Acequia Madre - Multi-Vehicle"},
-            {lat: 35.6900, lng: -105.9800, popup: "I-25 Southbound Ramp - Property Damage"},
-            {lat: 35.6750, lng: -105.9300, popup: "St. Michaels Dr & Llano St - Injury"},
-            {lat: 35.6950, lng: -105.9400, popup: "Cerrillos Rd near Rodeo Rd - Multi-Vehicle"},
-            {lat: 35.6550, lng: -105.9100, popup: "Old Santa Fe Trail - Pedestrian Involved"},
-            {lat: 35.7200, lng: -105.9900, popup: "NM 599 Area - Property Damage"}
+            {lat: 35.6808, lng: -105.9502, popup: "Cerrillos Rd & Siler Rd - Injury + DWI"},
+            {lat: 35.6555, lng: -105.9105, popup: "Cerrillos Rd & Lujan St - Pedestrian Injury"},
+            {lat: 35.7205, lng: -105.9905, popup: "W Frontage Rd & NM 599 - Hit & Run"},
+            {lat: 35.6402, lng: -105.8908, popup: "Airport Rd & Cerrillos Rd - Pedestrian"},
+            {lat: 35.6855, lng: -105.9602, popup: "W Palace Ave & Grant Ave - Intersection Collision"},
+            {lat: 35.6755, lng: -105.9305, popup: "Paseo del Sol Area - Multi-Vehicle"}
         ];
 
         crashes.forEach(crash => {
@@ -74,7 +73,7 @@
                 .bindPopup(crash.popup);
         });
 
-        L.heatLayer(crashes.map(c => [c.lat, c.lng]), {radius: 35, blur: 25}).addTo(map);
+        L.heatLayer(crashes.map(c => [c.lat, c.lng]), {radius: 40, blur: 30}).addTo(map);
     </script>
 </body>
 </html>
