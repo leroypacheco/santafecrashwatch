@@ -6,57 +6,49 @@
     <title>Santa Fe Crash Watch</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body { font-family: Arial, Helvetica, sans-serif; margin:0; background: #f4f4f4; color: #222; }
-        header { background: #1a3c5e; color: white; padding: 1.5rem; text-align: center; }
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-        h1 { margin: 0; font-size: 2.2rem; }
-        .subtitle { font-size: 1.1rem; opacity: 0.9; }
-        .section { background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        a { color: #1a3c5e; text-decoration: none; }
+        body { font-family: Arial, Helvetica, sans-serif; margin:0; background: #f8f9fa; color: #222; line-height: 1.6; }
+        header { background: #1a3c5e; color: white; padding: 2rem 1rem; text-align: center; }
+        h1 { margin: 0; font-size: 2.5rem; }
+        .subtitle { font-size: 1.25rem; margin: 0.5rem 0 0; opacity: 0.95; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .section { background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        a { color: #1a3c5e; text-decoration: none; font-weight: bold; }
         a:hover { text-decoration: underline; }
-        #map { height: 500px; border-radius: 8px; }
-        .footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: #666; }
+        #map { height: 560px; border-radius: 10px; }
+        .footer { text-align: center; padding: 2rem; font-size: 0.95rem; color: #555; background: #f1f1f1; margin-top: 2rem; }
+        .update { font-style: italic; color: #d35400; font-weight: bold; }
     </style>
 </head>
 <body>
     <header>
         <h1>Santa Fe Crash Watch</h1>
-        <p class="subtitle">Weekly Traffic Safety Summary • By Leroy Pacheco, PE</p>
+        <p class="subtitle">Monthly Traffic Safety Summary • By Leroy Pacheco, PE</p>
     </header>
 
     <div class="container">
         <div class="section">
-            <h2>Latest Week: [Insert Week Ending Date]</h2>
+            <h2>April 2026 Summary</h2>
             <p><strong>Official City Crash Reports:</strong> 
                 <a href="https://crash-report-thecitydifferent.hub.arcgis.com" target="_blank">View All Reports on the City's ArcGIS Hub →</a>
             </p>
+            <p class="update">Last Updated: [Insert Date]</p>
         </div>
 
         <div class="section">
-            <h2>This Week's Hotspot Map</h2>
+            <h2>This Month's Hotspot Map</h2>
             <div id="map"></div>
         </div>
 
         <div class="section">
-            <h2>Latest Podcast / Audio Summary</h2>
-            <p>Watch or listen to this week's summary (recorded by Leroy Pacheco):</p>
-            <p><em>Video placeholder — embed your YouTube video here after upload.</em></p>
-        </div>
-
-        <div class="section">
-            <h2>This Week’s Summary (Script for Recording)</h2>
-            <div id="script-placeholder">
-                <p><strong>Good morning, Santa Fe.</strong></p>
-                <p>This is your weekly Santa Fe Crash Watch summary.</p>
-                <p><strong>Week ending [Date]:</strong> There were X crashes reported by Santa Fe Police.</p>
-                <p>Most incidents were concentrated near [major streets]. Two injury collisions were reported...</p>
-            </div>
+            <h2>Monthly Audio Summary</h2>
+            <p>Listen to Leroy Pacheco’s April 2026 traffic safety summary (3–5 minutes):</p>
+            <p><em>→ Video placeholder — embed your YouTube video here after upload</em></p>
         </div>
     </div>
 
     <div class="footer">
-        Santa Fe Crash Watch • Public Safety Information • Not affiliated with official City of Santa Fe agencies<br>
-        All data sourced from <a href="https://crash-report-thecitydifferent.hub.arcgis.com">City of Santa Fe Crash Reports</a>
+        Santa Fe Crash Watch • Independent Public Safety Information<br>
+        All crash data sourced from the City of Santa Fe • Not affiliated with official City agencies
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -66,10 +58,13 @@
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
+        // April 2026 placeholder data - we'll update with real crashes each month
         const crashes = [
-            {lat: 35.6805, lng: -105.9500, popup: "Cerrillos Rd & St. Francis - Property Damage"},
-            {lat: 35.6600, lng: -105.9200, popup: "Paseo de Peralta & Acequia Madre - Injury Crash"},
-            {lat: 35.6900, lng: -105.9800, popup: "I-25 Area - Multi-Vehicle"}
+            {lat: 35.6805, lng: -105.9500, popup: "Cerrillos Rd & St. Francis - Injury Crash"},
+            {lat: 35.6600, lng: -105.9200, popup: "Paseo de Peralta & Acequia Madre - Multi-Vehicle"},
+            {lat: 35.6900, lng: -105.9800, popup: "I-25 Southbound - Property Damage"},
+            {lat: 35.6750, lng: -105.9300, popup: "St. Michaels Dr - Injury Crash"}
+            // Add more real points each month
         ];
 
         crashes.forEach(crash => {
@@ -77,7 +72,7 @@
                 .bindPopup(crash.popup);
         });
 
-        L.heatLayer(crashes.map(c => [c.lat, c.lng]), {radius: 25}).addTo(map);
+        L.heatLayer(crashes.map(c => [c.lat, c.lng]), {radius: 35, blur: 25}).addTo(map);
     </script>
 </body>
 </html>
